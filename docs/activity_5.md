@@ -325,4 +325,9 @@ const Character : React.FC<CharacterProps> = ( { character, updateFavourites }) 
 export default Character;
 ```
 
+Congratulations for making it this far! 🙌 🔥
 
+
+You can put your feet up and relax, you deserve it! However, the learning never stops 😅 
+
+If you feel like another challenge... an extension activity can be found here: [Extension](./activity_6.md). You can do it! 🙌 💪 🧠
