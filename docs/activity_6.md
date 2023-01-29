@@ -12,10 +12,10 @@ As a user I want to be able to toggle between seeing my favourite Disney charact
 
 #### Acceptance criteria
 
-* When the "Show Favourites" button is clicked, the UI should show only the favourite characters that the user has chosen
-* The UI should show favourite characters irrespective of which page of the API they appear on
-* The "Show Favourites" button should be updated to say "Show All" after being clicked
-* When the user clicks "Show All" it should revert back to showing page 1 of ALL the disney characters
+- When the "Show Favourites" button is clicked, the UI should show only the favourite characters that the user has chosen
+- The UI should show favourite characters irrespective of which page of the API they appear on
+- The "Show Favourites" button should be updated to say "Show All" after being clicked
+- When the user clicks "Show All" it should revert back to showing page 1 of ALL the Disney characters
 
 ## Hints and tips
 

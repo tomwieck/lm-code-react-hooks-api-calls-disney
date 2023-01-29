@@ -1,6 +1,6 @@
-# Activity 4 - Favouriting characters
+# Activity 4 - Favouriting Characters
 
-## Collecting favourites
+## Collecting favourites 😍
 
 Notice the bit of text on each of the character cards that says **Add to favourites**. At the moment when you click that bit of text it doesn't seem to do anything.
 
@@ -10,7 +10,7 @@ If the character has been favourited then the text should be updated to say **Fa
 
 ## State to track favourites
 
-Favouriting a character is yet another example of ***state*** that our app needs to track. Flipping from 'not favourited' to 'favourited' is a change of state for a given character. So it should be no surprise that we'll use the **useState** hook again to track user favourites.
+Favouriting a character is yet another example of **_state_** that our app needs to track. Flipping from 'not favourited' to 'favourited' is a change of state for a given character. So it should be no surprise that we'll use the **useState** hook again to track user favourites.
 
 👉 Open up your **App.tsx** and introduce another piece of state to track favourites.
 
@@ -18,7 +18,7 @@ Favouriting a character is yet another example of ***state*** that our app needs
 const [characterFavourites, setCharacterFavourites] = useState<any>([]);
 ```
 
-We should specify the ***type*** of our array as the generic parameter to `useState<T>` but we haven't decided what that data will look like yet. Let's put `any` for now, and then we'll come back and update it in a bit once we've figured out the data type.
+We should specify the **_type_** of our array as the generic parameter to `useState<T>` but we haven't decided what that data will look like yet. Let's put `any` for now, and then we'll come back and update it in a bit once we've figured out the data type.
 
 ❗ `any` might be useful during development as it "stops TypeScript complaining" but using it as a crutch will inevitably lead to disaster. It's _much better_ to define the type at the moment you add it - even if you have to go back and change it later!
 
@@ -26,22 +26,22 @@ We should specify the ***type*** of our array as the generic parameter to `useSt
 
 In order to add the character to the list of favourites or know whether the character is already favourited we'll need both the **characterFavourites** array and the **setCharacterFavourites** function. These are defined in **App.tsx** so we need to pass them down as **props**, firstly through to the [CharacterContainer](../src/components/character_container.tsx) and then on to the [Character](../src/components/character.tsx) component.
 
-👉 Update the JSX where the **CharacterContainer** is utilised in **App.tsx** to pass in the props. 
+👉 Update the JSX where the **CharacterContainer** is utilised in **App.tsx** to pass in the props.
 
 ```JSX
 // character_container.tsx
-<CharacterContainer characters={characters} 
-                    characterFavourites={characterFavourites} 
+<CharacterContainer characters={characters}
+                    characterFavourites={characterFavourites}
                     updateFavourites={setCharacterFavourites}  />
 ```
 
-TypeScript will correctly complain that it doesn't know what these props are, so we'd better pop over to ***character_container.tsx*** and update it.
+TypeScript will correctly complain that it doesn't know what these props are, so we'd better pop over to **_character_container.tsx_** and update it.
 
 👉 Look at the props of `<CharacterContainer>`. Right now we're defining an anonymous type, which we could easily extend by adding the two new properties... but it's starting to feel like things might be cleaner if we add an `interface` instead:
 
 ```TypeScript
 // character_container.tsx
-interface CharacterContainerProps{ 
+interface CharacterContainerProps{
 	characters: Array<DisneyCharacter>;
 	characterFavourites: Array<any>;
 	updateFavourites: (favourites: Array<any>) => void;
@@ -78,10 +78,10 @@ That is where the **Character** component is defined and utilised. Let's update 
 
 ```JSX
 cols.push(
-    <Character key={character._id} 
-                character={character} 
-                characterFavourites={characterFavourites} 
-                updateFavourites={updateFavourites} 
+    <Character key={character._id}
+                character={character}
+                characterFavourites={characterFavourites}
+                updateFavourites={updateFavourites}
     />
 );
 ```
@@ -101,16 +101,16 @@ interface CharacterProps{
 }
 
 // notice we're updating the props destructuring to access the two new props too:
-const Character : React.FC<CharacterProps> = ( { character, characterFavourites, updateFavourites }) => 
+const Character : React.FC<CharacterProps> = ( { character, characterFavourites, updateFavourites }) =>
 ```
 
 ## Adding to favourites
 
 Let's recap what you've done.
 
-* Created an array and corresponding function for storing and managing favourites that will be stored in state
-* Passed that array and function down from the `App` component to the `CharacterContainer` component as a prop
-* Passed that array from the `CharacterContainer` component to the `Character` component as a prop
+- Created an array and corresponding function for storing and managing favourites that will be stored in state
+- Passed that array and function down from the `App` component to the `CharacterContainer` component as a prop
+- Passed that array from the `CharacterContainer` component to the `Character` component as a prop
 
 Now we can add favourites from the **Character** component where the **Add to favourites** text is located.
 
@@ -157,7 +157,7 @@ Attach an onClick listener
 </pre>
 </details>
 
-👉 Attach a click listener to the corresponding `div` 
+👉 Attach a click listener to the corresponding `div`
 
 ```JSX
 <div className="character-item__actions" onClick={() => toggleFavouriteForCharacter(character._id)}>
@@ -188,8 +188,3 @@ Let's use some [conditional rendering](https://reactjs.org/docs/conditional-rend
 Sadly, the celebration is short-lived... we're doing quite a bit of [prop drilling](https://kentcdodds.com/blog/prop-drilling) to pass the favourites and updateFavourites down through the component tree.
 
 Take another break, commit and push things up to GitHub and move on to [activity 5](./activity_5.md) where we'll use another React hook to remove the need for prop drilling.
-
-
-
-
-

@@ -1,32 +1,32 @@
 # Activity 5 - Avoid Prop Drilling with useContext
 
-## Prop drilling
+## Prop drilling 👷🚧
 
-So far you've successfully got the favourite Disney characters being tracked.
+So far you've successfully got the favourite Disney characters being tracked. 🙌
 
-However in order to do so you have passed data and functions through the component tree. From **App** => **CharacterContainer** => **Character**
+However, in order to do so you have passed data and functions through the component tree. From **App** => **CharacterContainer** => **Character**
 
 For this size of application that might actually be a totally valid way to approach things.
 
-However for a large application with hundreds of components then passing items through the component tree might cause challenges further down the line.
+For a large application with hundreds of components though, passing items through the component tree might cause challenges further down the line.
 
 Let's think about sharing state between components. There are a number of cases where "global" state is useful in every component such as:
 
-* Application theme (EG. Dark mode or light mode)
-* User profile information
+- Application theme (EG. Dark mode or light mode)
+- User profile information
 
 In those cases it might be useful for EVERY component to have access to that state in order to take actions.
 
 Then there are cases where state needs to be shared by some component trees, such as:
 
-* Specific page states
-* Product pages that need to share state for a specific product
+- Specific page states
+- Product pages that need to share state for a specific product
 
-With React we can use the [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) hook to create state which can be accessed by a component tree. If we put this context at our App level then we have effectively created global state: state that is available globally to ALL components, i.e. the entire tree. And if we put it at a 'lower' level then we've got state that is shared between a smaller tree of components.
+With React we can use the [useContext](https://beta.reactjs.org/reference/react/useContext#usecontext) hook to create state which can be accessed by a component tree 🌴. If we put this context at our App level then we have effectively created global 🌍 state: state that is available globally to ALL components, i.e. the entire tree. And if we put it at a 'lower' level then we've got state that is shared between a smaller tree of components.
 
-Since our app is *entirely* based around favouriting Disney characters it seems appropriate to place our favourites data context at the App level and make it global. However, in larger apps we should consider the correct place for our contexts to sit. 
+Since our app is _entirely_ based around favouriting Disney characters, it seems appropriate to place our favourites data context at the App level and make it global. However, in larger apps we should consider the correct place for our contexts to sit.
 
-💡 The golden rule is that we should wrap our contexts around the smallest possible tree of components that need access to the context data. For example, if we had an "FAQ" page it wouldn't need to access any product data, so any `ProductContext` should not be global, but should just wrap the Product pages.
+💡 The ✨ golden rule ✨ is that we should wrap our contexts around the smallest possible tree of components that need access to the context data. For example, if we had an "FAQ" page it wouldn't need to access any product data, so any `ProductContext` should not be global, but should just wrap the Product pages.
 
 ## Creating the context
 
@@ -56,7 +56,7 @@ return (
 );
 ```
 
-Notice we wrap all components in a new JSX tag which is your **FavouritesContext.Provider**. Also crucially notice the **value** prop. For context providers the prop is ALWAYS called **value**. The value we are specifying is the array of **characterFavourites**
+Notice we wrap all components in a new JSX tag which is your **FavouritesContext.Provider**. Also, crucially notice the **value** prop. For context providers the prop is ALWAYS called **value**. The value we are specifying is the array of **characterFavourites**
 
 (Again, this could be a complex type - for now we're just using a `number[]`)
 
@@ -64,7 +64,7 @@ You might be thinking...Hmmm but thats just the data, what about being able to u
 
 Now we've wrapped all components with the context we can remove the **characterFavourites** prop from our component tree.
 
-👉 Update the return statement in the App.tsx to remove the **characterFavourites** prop 
+👉 Update the return statement in the `App.tsx` to remove the **characterFavourites** prop
 
 ```JSX
 return (
@@ -81,8 +81,8 @@ return (
 👉 Open up your [CharacterContainer](../src/components/character_container.js) and we can remove the **characterFavourites** prop from there also. In order to do this we firstly remove it from the interface:
 
 ```JSX
-interface CharacterContainerProps{ 
-	characters: Array<DisneyCharacter>;	
+interface CharacterContainerProps{
+	characters: Array<DisneyCharacter>;
 	// removed characterFavourites
 	updateFavourites: (favourites: Array<number>) => void;
 }
@@ -94,8 +94,8 @@ This will immediately break everything! We have to remove the prop we're passing
 ```JSX
 // character_container.jsx
 
-interface CharacterContainerProps{ 
-	characters: Array<DisneyCharacter>;	
+interface CharacterContainerProps{
+	characters: Array<DisneyCharacter>;
 	updateFavourites: (favourites: Array<number>) => void;
 }
 
@@ -103,12 +103,12 @@ const CharacterContainer : React.FC<CharacterContainerProps> = ( { characters, u
 
 	// this function separates our array of DisneyCharacters into rows and columns
     const buildRows = () => {
-        
+
 		// we'll need arrays to store the rows and cols in, and they will be of type JSX.Element
 		let rows : Array<JSX.Element> = [], cols : Array<JSX.Element> = [];
-        
+
 		characters.forEach((character, index) => {
-            cols.push(<Character key={character._id} character={character} 
+            cols.push(<Character key={character._id} character={character}
                 updateFavourites={updateFavourites} />);
 
 // rest of file...
@@ -119,7 +119,7 @@ const CharacterContainer : React.FC<CharacterContainerProps> = ( { characters, u
 // character.tsx
 
 interface CharacterProps{
-	character: DisneyCharacter;	
+	character: DisneyCharacter;
 	updateFavourites: (favourites: Array<number>) => void;
 }
 
@@ -168,7 +168,6 @@ But wait....there's more! What about that **updateFavourites** method? We're sti
 
 👉 If you get this far make sure to git commit and push. Then for those wanting more learning why not try [activity 6](./activity_6.md)!!
 
-
 ## Sample code files
 
 #### App.tsx
@@ -193,7 +192,7 @@ const App : React.FC = () => {
 
   // Some dummy state representing disney characters
   const [characters, setCharacters] = useState<Array<DisneyCharacter>>([
-   
+
   ]);
 
   useEffect(() => {
@@ -207,7 +206,7 @@ const App : React.FC = () => {
 	console.log(characters);
   };
 
- 
+
 
 	return (
 		<FavouritesContext.Provider value={characterFavourites}>
@@ -232,8 +231,8 @@ import React from 'react';
 import { DisneyCharacter } from '../disney_character';
 import Character from './character';
 
-interface CharacterContainerProps{ 
-	characters: Array<DisneyCharacter>;	
+interface CharacterContainerProps{
+	characters: Array<DisneyCharacter>;
 	updateFavourites: (favourites: Array<number>) => void;
 }
 
@@ -241,12 +240,12 @@ const CharacterContainer : React.FC<CharacterContainerProps> = ( { characters, u
 
 	// this function separates our array of DisneyCharacters into rows and columns
     const buildRows = () => {
-        
+
 		// we'll need arrays to store the rows and cols in, and they will be of type JSX.Element
 		let rows : Array<JSX.Element> = [], cols : Array<JSX.Element> = [];
-        
+
 		characters.forEach((character, index) => {
-            cols.push(<Character key={character._id} character={character} 
+            cols.push(<Character key={character._id} character={character}
                 updateFavourites={updateFavourites} />);
             if ((index + 1) % 5 === 0) {
                 rows.push(
@@ -288,7 +287,7 @@ import React, { useContext } from 'react';
 import { FavouritesContext } from '../App';
 
 interface CharacterProps{
-	character: DisneyCharacter;	
+	character: DisneyCharacter;
 	updateFavourites: (favourites: Array<number>) => void;
 }
 
@@ -307,7 +306,7 @@ const Character : React.FC<CharacterProps> = ( { character, updateFavourites }) 
 		  updateFavourites(updatedFavourites);
 		}
 	  }
-  
+
     return(<article className="character-item">
 
       <h2>{character.name}</h2>
@@ -327,7 +326,6 @@ export default Character;
 
 Congratulations for making it this far! 🙌 🔥
 
-
-You can put your feet up and relax, you deserve it! However, the learning never stops 😅 
+You can put your feet up and relax, you deserve it! However, the learning never stops 😅
 
 If you feel like another challenge... an extension activity can be found here: [Extension](./activity_6.md). You can do it! 🙌 💪 🧠

@@ -12,13 +12,13 @@ For example, when this assignment was initially written, many Disney Characters 
 
 However, now it seems that many (all?) of the characters returned by the API have `imageUrl` properties that work on first load - so the original activity instructions are out-of-date because they changed their API!
 
-Still, the original instructions do contain useful ideas. So, whether or not you're experiencing broken images, here are the instructions to fix them. 
+Still, the original instructions do contain useful ideas. So, whether or not you're experiencing broken images, here are the instructions to fix them.
 
-It won't hurt to implement the fix to the old issue even if you're not experiencing it, and either way it's a good idea to implement a `default` image for if there's a missing image for some other reason that the issue the API _used_ to have.
+It won't hurt to implement the fix to the old issue even if you're not experiencing it, and either way it's a good idea to implement a `default` image for if there's a missing image for some other reason.
 
 ## Fixing the issue
 
-Let's look deeper into why the images aren't loading. 
+Let's look deeper into why the images aren't loading.
 
 If you look in the browser console you'll notice that there are lot of 404 status code errors. File not found. Similar to the image below:
 
@@ -28,9 +28,9 @@ If we cross reference that with the component that displays characters [Characte
 
 👉 Try hitting the characters endpoint with your browser and copy the path to the **imageUrl** of one of the results. It should look something like this: `https://static.wikia.nocookie.net/disney/images/6/61/Olu_main.png/revision/latest?cb=20200630025227`
 
-That URL looks odd because it seems to reference a PNG image but then there is further path information after the **png** part such as `/revision/latest?cb=20200630025227`. This almost seems like another API for fetching images. 
+That URL looks odd because it seems to reference a PNG image but then there is further path information after the **png** part such as `/revision/latest?cb=20200630025227`. This almost seems like another API for fetching images.
 
-🤔 You take a sip of your drink and have a ponder. "I wonder if I can strip off everything after the image path and see if that loads". Essentially remove the `/revision/latest?cb=20200630025227` part of the URL. 
+🤔 You take a sip of your drink and have a ponder. "I wonder if I can strip off everything after the image path and see if that loads". Essentially remove the `/revision/latest?cb=20200630025227` part of the URL.
 
 This is also a good opportunity to think about failure scenarios - what would happen if the character didn't have an image? It would be nice to have a default image shown.
 
@@ -42,7 +42,7 @@ const Character : React.FC<{ character: DisneyCharacter}> = ( { character }) => 
   // Define a default in case the character doesn't have an image
   let imageSrc = "https://picsum.photos/300/200/?blur";
   if (character.imageUrl) {
-    // API seems to include extra path for images so here we strip it off to fetch raw image	
+    // API seems to include extra path for images so here we strip it off to fetch raw image
     imageSrc = character.imageUrl.substring(0, character.imageUrl.indexOf('/revision'));
   }
 
@@ -67,4 +67,3 @@ export default Character;
 Here we worked through some of the challenges you might experience when consuming an API. There are many scenarios where you have a certain portion of data or data might not be in the form you'd like it to be. Often you'll need to talk with the API provider (whether thats another team member, another team entirely or even another external organisation) in order to find the best fix for the bug.
 
 👉 It's well worth committing and pushing to your repository before moving on to [activity 3](./activity_3.md) where we'll implement the ability to paginate through the characters.
-
